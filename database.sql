@@ -5,7 +5,7 @@ CREATE TABLE courses (
     description_course TEXT NOT NULL,
     created_at TIMESTAMP NOT NULL,
     updated_at TIMESTAMP NOT NULL,
-    is_deleted TINYINT NOT NULL
+    is_deleted SMALLINT NOT NULL
 );
 
 -- Таблица уроков
@@ -18,7 +18,7 @@ CREATE TABLE lessons (
     position INT NOT NULL,
     created_at TIMESTAMP NOT NULL,
     updated_at TIMESTAMP NOT NULL,
-    is_deleted TINYINT NOT NULL
+    is_deleted SMALLINT NOT NULL
 );
 
 -- Таблица модулей
@@ -28,7 +28,7 @@ CREATE TABLE modules (
     description_module TEXT NOT NULL,
     created_at TIMESTAMP NOT NULL,
     updated_at TIMESTAMP NOT NULL,
-    is_deleted TINYINT NOT NULL
+    is_deleted SMALLINT NOT NULL
 );
 
 -- связующая таблица курсов и модулей
@@ -36,7 +36,7 @@ CREATE TABLE courses_modules (
     module_id BIGINT REFERENCES modules (id) NOT NULL,
     course_id BIGINT REFERENCES courses (id) NOT NULL,
     PRIMARY KEY (module_id, course_id)
-)
+);
 
 -- Таблица программ
 CREATE TABLE programs (
