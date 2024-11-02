@@ -88,7 +88,7 @@ CREATE TABLE users (
     id BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     name VARCHAR(255) UNIQUE NOT NULL,
     email VARCHAR(255) NOT NULL,
-    password_hash VARCHAR(100) NOT NULL,
+    password_hash VARCHAR(100),
     teaching_group_id BIGINT REFERENCES teaching_groups (id),
     role VARCHAR(255) NOT NULL,
     created_at TIMESTAMP NOT NULL,
@@ -163,4 +163,4 @@ CREATE TABLE blogs (
     status status_blog NOT NULL,
     updated_at TIMESTAMP NOT NULL,
     user_id BIGINT REFERENCES users (id)
-)
+);
