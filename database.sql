@@ -122,45 +122,45 @@ CREATE TABLE payments (
 CREATE TYPE status_completion AS ENUM ('active', 'completed', 'pending', 'cancelled');
 -- таблица прогресса прохождения
 CREATE TABLE program_completions (
+    completed_at TIMESTAMP NOT NULL,
+    created_at TIMESTAMP NOT NULL,
     id BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     user_id BIGINT REFERENCES users (id) NOT NULL,
     program_id BIGINT REFERENCES programs (id) NOT NULL,
     status status_completion NOT NULL,
-    started_atTIMESTAMP NOT NULL,
-    completed_at TIMESTAMP NOT NULL,
-    created_at TIMESTAMP NOT NULL,
+    started_at TIMESTAMP NOT NULL,
     updated_at TIMESTAMP NOT NULL
 );
 
 -- таблица сертификатов
 CREATE TABLE certificates (
-    id BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-    user_id BIGINT REFERENCES users (id),
-    program_id BIGINT REFERENCES programs (id) NOT NULL,
-    url VARCHAR(255) NOT NULL,
-    issued_at TIMESTAMP NOT NULL,
     created_at TIMESTAMP NOT NULL,
-    updated_at TIMESTAMP NOT NULL
+    id BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    issued_at TIMESTAMP NOT NULL,
+    program_id BIGINT REFERENCES programs (id) NOT NULL,
+    updated_at TIMESTAMP NOT NULL,
+    url VARCHAR(255) NOT NULL,
+    user_id BIGINT REFERENCES users (id)
 );
 
 -- таблица обсуждений
 CREATE TABLE discussions (
+    created_at TIMESTAMP NOT NULL,
     id BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     lesson_id BIGINT REFERENCES lessons (id) NOT NULL,
-    user_id BIGINT REFERENCES users (id) NOT NULL,
     text TEXT,
-    created_at TIMESTAMP NOT NULL,
-    updated_at TIMESTAMP NOT NULL
+    updated_at TIMESTAMP NOT NULL,
+    user_id BIGINT REFERENCES users (id) NOT NULL
 );
 
 CREATE TYPE status_blog AS ENUM ('created', 'in moderation', 'published', 'archived');
 -- таблица личных блогов
 CREATE TABLE blogs (
-    id BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-    user_id BIGINT REFERENCES users (id),
-    name VARCHAR(255) NOT NULL,
     content TEXT NOT NULL,
-    status status_blog NOT NULL,
     created_at TIMESTAMP NOT NULL,
-    updated_at TIMESTAMP NOT NULL
+    id BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    name VARCHAR(255) NOT NULL,
+    status status_blog NOT NULL,
+    updated_at TIMESTAMP NOT NULL,
+    user_id BIGINT REFERENCES users (id)
 )
