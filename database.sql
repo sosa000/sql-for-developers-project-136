@@ -5,7 +5,7 @@ CREATE TABLE courses (
     description TEXT NOT NULL,
     created_at TIMESTAMP NOT NULL,
     updated_at TIMESTAMP NOT NULL,
-    deleted_at SMALLINT NOT NULL
+    deleted_at TIMESTAMP NOT NULL
 );
 
 -- Таблица уроков
@@ -18,7 +18,7 @@ CREATE TABLE lessons (
     position INT NOT NULL,
     created_at TIMESTAMP NOT NULL,
     updated_at TIMESTAMP NOT NULL,
-    deleted_at SMALLINT NOT NULL
+    deleted_at TIMESTAMP NOT NULL
 );
 
 -- таблица квизов
@@ -48,7 +48,7 @@ CREATE TABLE modules (
     description TEXT NOT NULL,
     created_at TIMESTAMP NOT NULL,
     updated_at TIMESTAMP NOT NULL,
-    deleted_at SMALLINT NOT NULL
+    deleted_at TIMESTAMP NOT NULL
 );
 
 -- связующая таблица курсов и модулей
@@ -93,7 +93,7 @@ CREATE TABLE users (
     role VARCHAR(255) NOT NULL,
     created_at TIMESTAMP NOT NULL,
     updated_at TIMESTAMP NOT NULL,
-    deleted_at SMALLINT
+    deleted_at TIMESTAMP
 );
 
 CREATE TYPE status_enrollment AS ENUM ('active', 'pending', 'cancelled', 'completed');
