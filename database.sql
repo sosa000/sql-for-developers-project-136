@@ -21,6 +21,26 @@ CREATE TABLE lessons (
     deleted_at SMALLINT NOT NULL
 );
 
+-- таблица квизов
+CREATE TABLE quizzes (
+    id BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    lesson_id BIGINT REFERENCES lessons (id) NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    content TEXT,
+    created_at TIMESTAMP NOT NULL,
+    updated_at TIMESTAMP NOT NULL
+);
+
+-- таблица практик
+CREATE TABLE exercises (
+    id BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    lesson_id BIGINT REFERENCES lessons (id) NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    url VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP NOT NULL,
+    updated_at TIMESTAMP NOT NULL
+);
+
 -- Таблица модулей
 CREATE TABLE modules (
     id BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
@@ -63,7 +83,6 @@ CREATE TABLE teaching_groups (
     updated_at TIMESTAMP NOT NULL
 );
 
--- CREATE TYPE roles AS ENUM ('student', 'teacher', 'admin'); возможное перечисление для ролей
 -- таблица пользователей
 CREATE TABLE users (
     id BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
@@ -120,26 +139,6 @@ CREATE TABLE certificates (
     program_id BIGINT REFERENCES programs (id) NOT NULL,
     url VARCHAR(255) NOT NULL,
     issued_at TIMESTAMP NOT NULL,
-    created_at TIMESTAMP NOT NULL,
-    updated_at TIMESTAMP NOT NULL
-);
-
--- таблица квизов
-CREATE TABLE quizzes (
-    id BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-    lesson_id BIGINT REFERENCES lessons (id) NOT NULL,
-    name VARCHAR(255) NOT NULL,
-    content TEXT,
-    created_at TIMESTAMP NOT NULL,
-    updated_at TIMESTAMP NOT NULL
-);
-
--- таблица практик
-CREATE TABLE exercises (
-    id BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-    lesson_id BIGINT REFERENCES lessons (id) NOT NULL,
-    name VARCHAR(255) NOT NULL,
-    url VARCHAR(255) NOT NULL,
     created_at TIMESTAMP NOT NULL,
     updated_at TIMESTAMP NOT NULL
 );
