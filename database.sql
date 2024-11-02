@@ -11,11 +11,11 @@ CREATE TABLE courses (
 -- Таблица уроков
 CREATE TABLE lessons (
     id BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-    course_id BIGINT REFERENCES courses (id) NOT NULL,
+    course_id BIGINT REFERENCES courses (id),
     name VARCHAR(255) NOT NULL,
     content TEXT NOT NULL,
     video_url VARCHAR(255),
-    position INT NOT NULL,
+    position INT,
     created_at TIMESTAMP NOT NULL,
     updated_at TIMESTAMP NOT NULL,
     deleted_at TIMESTAMP NOT NULL
