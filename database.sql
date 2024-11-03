@@ -168,3 +168,6 @@ CREATE TABLE blogs (
     created_at TIMESTAMP NOT NULL,
     updated_at TIMESTAMP NOT NULL
 );
+
+
+-- УРА БЛЯЯЯЯЯЯЯЯЯЯ
