@@ -16,13 +16,13 @@ CREATE TABLE courses (
 -- Таблица уроков
 CREATE TABLE lessons (
     id BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-    course_id BIGINT REFERENCES courses (id),
     name VARCHAR(255) NOT NULL,
     content TEXT NOT NULL,
     video_url VARCHAR(255),
     position INT,
     created_at TIMESTAMP NOT NULL,
     updated_at TIMESTAMP NOT NULL,
+    course_id BIGINT REFERENCES courses (id),
     deleted_at TIMESTAMP
 );
 
@@ -67,7 +67,7 @@ CREATE TABLE course_modules (
 CREATE TABLE programs (
     id BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     name VARCHAR(255) NOT NULL,
-    price DECIMAL(12, 2) NOT NULL,
+    price DECIMAL(12, 2),
     program_type VARCHAR(255) NOT NULL,
     created_at TIMESTAMP NOT NULL,
     updated_at TIMESTAMP NOT NULL
@@ -94,8 +94,8 @@ CREATE TABLE users (
     name VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL,
     password_hash VARCHAR(100),
-    teaching_group_id BIGINT REFERENCES teaching_groups (id),
     role VARCHAR(255) NOT NULL,
+    teaching_group_id BIGINT REFERENCES teaching_groups (id),
     created_at TIMESTAMP NOT NULL,
     updated_at TIMESTAMP NOT NULL,
     deleted_at TIMESTAMP
@@ -127,44 +127,44 @@ CREATE TABLE payments (
 
 -- таблица прогресса прохождения
 CREATE TABLE program_completions (
-    completed_at TIMESTAMP NOT NULL,
-    created_at TIMESTAMP NOT NULL,
     id BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     user_id BIGINT REFERENCES users (id) NOT NULL,
     program_id BIGINT REFERENCES programs (id) NOT NULL,
     status status_completion NOT NULL,
     started_at TIMESTAMP NOT NULL,
+    completed_at TIMESTAMP NOT NULL,
+    created_at TIMESTAMP NOT NULL,
     updated_at TIMESTAMP NOT NULL
 );
 
 -- таблица сертификатов
 CREATE TABLE certificates (
-    created_at TIMESTAMP NOT NULL,
     id BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-    issued_at TIMESTAMP NOT NULL,
-    program_id BIGINT REFERENCES programs (id) NOT NULL,
-    updated_at TIMESTAMP NOT NULL,
+    user_id BIGINT REFERENCES users (id),
+    program_id BIGINT REFERENCES programs (id),
     url VARCHAR(255) NOT NULL,
-    user_id BIGINT REFERENCES users (id)
+    issued_at TIMESTAMP NOT NULL,
+    created_at TIMESTAMP NOT NULL,
+    updated_at TIMESTAMP NOT NULL
 );
 
 -- таблица обсуждений
 CREATE TABLE discussions (
-    created_at TIMESTAMP NOT NULL,
     id BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     lesson_id BIGINT REFERENCES lessons (id) NOT NULL,
+    user_id BIGINT REFERENCES users (id) NOT NULL,
     text TEXT,
-    updated_at TIMESTAMP NOT NULL,
-    user_id BIGINT REFERENCES users (id) NOT NULL
+    created_at TIMESTAMP NOT NULL,
+    updated_at TIMESTAMP NOT NULL
 );
 
 -- таблица личных блогов
 CREATE TABLE blogs (
-    content TEXT NOT NULL,
-    created_at TIMESTAMP NOT NULL,
     id BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    user_id BIGINT REFERENCES users (id),
     name VARCHAR(255) NOT NULL,
+    content TEXT NOT NULL,
     status status_blog NOT NULL,
-    updated_at TIMESTAMP NOT NULL,
-    user_id BIGINT REFERENCES users (id)
+    created_at TIMESTAMP NOT NULL,
+    updated_at TIMESTAMP NOT NULL
 );
