@@ -5,7 +5,7 @@ CREATE TABLE courses (
     description TEXT NOT NULL,
     created_at TIMESTAMP NOT NULL,
     updated_at TIMESTAMP NOT NULL,
-    deleted_at TIMESTAMP NOT NULL
+    deleted_at TIMESTAMP
 );
 
 -- Таблица уроков
@@ -18,7 +18,7 @@ CREATE TABLE lessons (
     position INT,
     created_at TIMESTAMP NOT NULL,
     updated_at TIMESTAMP NOT NULL,
-    deleted_at TIMESTAMP NOT NULL
+    deleted_at TIMESTAMP
 );
 
 -- таблица квизов
@@ -48,7 +48,7 @@ CREATE TABLE modules (
     description TEXT NOT NULL,
     created_at TIMESTAMP NOT NULL,
     updated_at TIMESTAMP NOT NULL,
-    deleted_at TIMESTAMP NOT NULL
+    deleted_at TIMESTAMP
 );
 
 -- связующая таблица курсов и модулей
