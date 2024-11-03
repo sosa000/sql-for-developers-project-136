@@ -128,11 +128,11 @@ CREATE TABLE payments (
 -- таблица прогресса прохождения
 CREATE TABLE program_completions (
     id BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-    user_id BIGINT REFERENCES users (id) NOT NULL,
-    program_id BIGINT REFERENCES programs (id) NOT NULL,
+    user_id BIGINT REFERENCES users (id),
+    program_id BIGINT REFERENCES programs (id),
     status status_completion NOT NULL,
-    started_at TIMESTAMP NOT NULL,
-    completed_at TIMESTAMP NOT NULL,
+    started_at TIMESTAMP,
+    completed_at TIMESTAMP,
     created_at TIMESTAMP NOT NULL,
     updated_at TIMESTAMP NOT NULL
 );
