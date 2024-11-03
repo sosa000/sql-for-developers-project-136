@@ -1,3 +1,8 @@
+CREATE TYPE status_completion AS ENUM ('active', 'completed', 'pending', 'cancelled');
+CREATE TYPE status_enrollment AS ENUM ('active', 'pending', 'cancelled', 'completed');
+CREATE TYPE payment_status AS ENUM ('pending', 'paid', 'failed', 'refunded');
+CREATE TYPE status_blog AS ENUM ('created', 'in moderation', 'published', 'archived');
+
 -- Таблица курсов
 CREATE TABLE courses (
     id BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
@@ -96,7 +101,7 @@ CREATE TABLE users (
     deleted_at TIMESTAMP
 );
 
-CREATE TYPE status_enrollment AS ENUM ('active', 'pending', 'cancelled', 'completed');
+
 -- таблица подписок
 CREATE TABLE enrollments (
     id BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
@@ -107,7 +112,7 @@ CREATE TABLE enrollments (
     updated_at TIMESTAMP NOT NULL
 );
 
-CREATE TYPE payment_status AS ENUM ('pending', 'paid', 'failed', 'refunded');
+
 -- таблица оплаты
 CREATE TABLE payments (
     id BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
@@ -119,7 +124,7 @@ CREATE TABLE payments (
     updated_at TIMESTAMP NOT NULL
 );
 
-CREATE TYPE status_completion AS ENUM ('active', 'completed', 'pending', 'cancelled');
+
 -- таблица прогресса прохождения
 CREATE TABLE program_completions (
     completed_at TIMESTAMP NOT NULL,
@@ -153,7 +158,6 @@ CREATE TABLE discussions (
     user_id BIGINT REFERENCES users (id) NOT NULL
 );
 
-CREATE TYPE status_blog AS ENUM ('created', 'in moderation', 'published', 'archived');
 -- таблица личных блогов
 CREATE TABLE blogs (
     content TEXT NOT NULL,
