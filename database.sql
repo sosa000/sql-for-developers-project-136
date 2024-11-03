@@ -29,9 +29,9 @@ CREATE TABLE lessons (
 -- таблица квизов
 CREATE TABLE quizzes (
     id BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-    lesson_id BIGINT REFERENCES lessons (id) NOT NULL,
+    lesson_id BIGINT REFERENCES lessons (id),
     name VARCHAR(255) NOT NULL,
-    content TEXT,
+    content JSONB,
     created_at TIMESTAMP NOT NULL,
     updated_at TIMESTAMP NOT NULL
 );
@@ -153,7 +153,7 @@ CREATE TABLE discussions (
     id BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     lesson_id BIGINT REFERENCES lessons (id) NOT NULL,
     user_id BIGINT REFERENCES users (id) NOT NULL,
-    text TEXT,
+    text JSONB,
     created_at TIMESTAMP NOT NULL,
     updated_at TIMESTAMP NOT NULL
 );
