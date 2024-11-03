@@ -91,7 +91,7 @@ CREATE TABLE teaching_groups (
 -- таблица пользователей
 CREATE TABLE users (
     id BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-    name VARCHAR(255) UNIQUE NOT NULL,
+    name VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL,
     password_hash VARCHAR(100),
     teaching_group_id BIGINT REFERENCES teaching_groups (id),
