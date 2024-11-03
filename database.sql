@@ -100,8 +100,8 @@ CREATE TYPE status_enrollment AS ENUM ('active', 'pending', 'cancelled', 'comple
 -- таблица подписок
 CREATE TABLE enrollments (
     id BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-    user_id BIGINT REFERENCES users (id) NOT NULL,
-    program_id BIGINT REFERENCES programs (id) NOT NULL,
+    user_id BIGINT REFERENCES users (id),
+    program_id BIGINT REFERENCES programs (id),
     status status_enrollment NOT NULL,
     created_at TIMESTAMP NOT NULL,
     updated_at TIMESTAMP NOT NULL
@@ -111,7 +111,7 @@ CREATE TYPE payment_status AS ENUM ('pending', 'paid', 'failed', 'refunded');
 -- таблица оплаты
 CREATE TABLE payments (
     id BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-    enrollment_id BIGINT REFERENCES enrollments (id) NOT NULL,
+    enrollment_id BIGINT REFERENCES enrollments (id),
     amount DECIMAL(12, 2) NOT NULL,
     status payment_status NOT NULL,
     paid_at TIMESTAMP NOT NULL,
